@@ -40,10 +40,10 @@ def load_rag():
 
     # FIXED: Explicitly using groq_api_key to satisfy validation rules
     llm = ChatGroq(
-        groq_api_key=st.secrets["GROQ_API_KEY"],
-        model_name="llama3-8b-8192",
-        temperature=0
-    )
+    groq_api_key=st.secrets["GROQ_API_KEY"],
+    model_name="openai/gpt-oss-20b",
+    temperature=0
+)
 
     qa = RetrievalQA.from_chain_type(
         llm=llm,
