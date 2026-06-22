@@ -4,6 +4,5 @@ langchain-community
 sentence-transformers
 faiss-cpu
 pypdf
-ollama
 streamlit
-langchain-classic
+langchain-groq
