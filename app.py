@@ -1,7 +1,8 @@
 import streamlit as st
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import Ollama
+# Switched from Ollama to ChatGroq for Cloud Deployment
+from langchain_groq import ChatGroq
 from langchain_classic.chains import RetrievalQA
 
 # ---------------- CONFIG ----------------
@@ -37,8 +38,10 @@ def load_rag():
         allow_dangerous_deserialization=True
     )
 
-    llm = Ollama(
-        model="moondream",
+    # FIXED: Explicitly using groq_api_key to satisfy validation rules
+    llm = ChatGroq(
+        groq_api_key=st.secrets["GROQ_API_KEY"],
+        model_name="llama3-8b-8192",
         temperature=0
     )
 
@@ -90,7 +93,7 @@ st.markdown(
     """
     <hr>
     <p style='text-align:center; font-size:12px; color:gray;'>
-    ⚽ Local RAG Football Bot | Powered by Ollama + FAISS
+    ⚽ Cloud RAG Football Bot | Powered by Groq + FAISS
     </p>
     """,
     unsafe_allow_html=True
